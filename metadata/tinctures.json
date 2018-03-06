@@ -1,0 +1,34 @@
+{
+    "colors": [
+        {
+            "name": "gules",
+            "hexcode": "#FF0000"
+        },
+        {
+            "name": "vert",
+            "hexcode": "#008800"
+        },
+        {
+            "name": "azure",
+            "hexcode": "#0000FF"
+        },
+        {
+            "name": "sable",
+            "hexcode": "#000000"
+        },
+        {
+            "name": "purpure",
+            "hexcode": "#990099"
+        }
+    ],
+    "metals": [
+        {
+            "name": "Or",
+            "hexcode": "#FFFF00"
+        },
+        {
+            "name": "argent",
+            "hexcode": "#FFFFFF"
+        }
+    ]
+}
