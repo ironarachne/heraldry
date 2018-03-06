@@ -33,7 +33,7 @@ class Heraldry {
         $shield = $shieldSource->getDocument()->getChild( 0 );
 
         $tinctureFactory = new TinctureFactory();
-        $tincture = $tinctureFactory->randomColor();
+        $tincture = $tinctureFactory->random();
 
         $shield->setStyle( 'fill', $tincture->getCode() );
 

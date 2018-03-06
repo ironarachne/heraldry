@@ -23,6 +23,15 @@ class TinctureFactory {
         return $tincture;
     }
 
+    public function random() {
+        $types = [
+            'color',
+            'metal'
+        ];
+        $randomTinctureType = $types[ mt_rand( 0, 1 ) ];
+        return $this->generateRandom( $randomTinctureType );
+    }
+
     public function randomColor() {
         return $this->generateRandom( 'color' );
     }
