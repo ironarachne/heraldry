@@ -21,4 +21,6 @@ composer install
 php generate.php
 ```
 
-Output will be `shield.png` in the root directory.
+Output will be `output.svg` in the root directory.
+
+Alternatively, you can run `./getpng.sh` if you have Google Chrome installed to get a PNG named `screenshot.png`.
