@@ -4,8 +4,10 @@ require_once 'vendor/autoload.php';
 
 use Heraldry\Heraldry;
 
-$imageWidth = 315;
-$imageHeight = 425;
+$imageWidth = 320;
+$imageHeight = 420;
 
 $heraldry = new Heraldry( $imageWidth, $imageHeight );
-$heraldry->render();
+
+$heraldry->renderToXML();
+$heraldry->renderToFile();
