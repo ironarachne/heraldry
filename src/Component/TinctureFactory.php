@@ -14,9 +14,14 @@ class TinctureFactory {
         $this->colors = $tinctureData->colors;
     }
     
-    private function generateRandom( $type ) {
+    private function generateRandom( $type, $skipTincture = false ) {
         $typePlural = $type . 's';
+
         $randomElement = $this->$typePlural[ mt_rand( 0, count( $this->$typePlural ) - 1 ) ];
+
+        while ( $skipTincture && ( $skipTincture->getName() == $randomElement->name ) ) {
+            $randomElement = $this->$typePlural[ mt_rand( 0, count( $this->$typePlural ) - 1 ) ];
+        }
 
         $tincture = new Tincture( $randomElement->name, $randomElement->hexcode, $type );
 
@@ -29,14 +34,15 @@ class TinctureFactory {
             'metal'
         ];
         $randomTinctureType = $types[ mt_rand( 0, 1 ) ];
+
         return $this->generateRandom( $randomTinctureType );
     }
 
-    public function randomColor() {
-        return $this->generateRandom( 'color' );
+    public function randomColor( $skipTincture = false ) {
+        return $this->generateRandom( 'color', $skipTincture );
     }
 
-    public function randomMetal() {
-        return $this->generateRandom( 'metal' );
+    public function randomMetal( $skipTincture = false ) {
+        return $this->generateRandom( 'metal', $skipTincture );
     }
 }

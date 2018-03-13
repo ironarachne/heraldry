@@ -34,7 +34,7 @@ class Heraldry {
     private function generateTinctures() {
         $tinctureFactory = new TinctureFactory();
         $this->tincture1 = $tinctureFactory->randomColor();
-        $this->tincture2 = $tinctureFactory->randomColor();
+        $this->tincture2 = $tinctureFactory->randomColor( $this->tincture1 );
         $this->tincture3 = $tinctureFactory->randomMetal();
     }
 
