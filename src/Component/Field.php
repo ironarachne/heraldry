@@ -44,7 +44,7 @@ class Field {
 
     public function getBlazon() {
         if ( $this->type == 'plain' ) {
-            return $this->tincture1;
+            return $this->tincture1->getName();
         } else {
             return $this->division->getBlazon() . ' ' . $this->tincture1->getName() . ' and ' . $this->tincture2->getName();
         }

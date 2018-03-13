@@ -10,6 +10,7 @@
         }
     ],
     "require": {
+        "twig/twig": "^2.4"
     },
     "autoload": {
         "psr-4": {"Heraldry\\": "src/"}

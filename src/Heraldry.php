@@ -7,19 +7,19 @@ use Heraldry\Component\TinctureFactory;
 
 class Heraldry {
 
-    private $image;
+    private $field;
     private $height;
-    private $width;
+    private $svg;
     private $tincture1;
     private $tincture2;
     private $tincture3;
-    private $field;
+    private $width;
 
     public function __construct( $width, $height ) {
         $this->width = $width;
         $this->height = $height;
 
-        $this->image = simplexml_load_file( './source-images/shield.svg' );
+        $this->svg = simplexml_load_file( './source-images/shield.svg' );
 
         $this->generateTinctures();
         $this->addField();
@@ -40,33 +40,23 @@ class Heraldry {
 
     public function getBlazon() {
         $blazon = $this->field->getBlazon();
+        $blazon = ucfirst( $blazon );
         return $blazon;
+    }
+
+    public function getSvg() {
+        return $this->svg;
     }
 
     public function renderElements() {
         $elements = $this->field->getElements();
 
         foreach ( $elements as $element ) {
-            $child = $this->image->addChild( $element[ 'name' ] );
+            $child = $this->svg->addChild( $element[ 'name' ] );
             foreach ( $element[ 'attributes' ] as $attribute => $value ) {
                 $child->addAttribute( $attribute, $value );
             }
         }
-    }
-
-    public function renderToFile( $fileName = 'output.svg' ) {
-        $file = fopen( $fileName, 'w' );
-        fwrite( $file, $this->image->asXML() );
-        fclose( $file );
-        
-        $blazonFile = fopen( "blazon-$fileName", 'w' );
-        fwrite( $blazonFile, $this->getBlazon() );
-        fclose( $blazonFile );
-    }
-
-    public function renderToXML() {
-        echo $this->image->asXML();
-        echo $this->getBlazon();
     }
 
 }

@@ -2,5 +2,7 @@
 .idea
 shield.png
 screenshot.png
-output.svg
-blazon-output.svg
+generated/*.svg
+generated/*.txt
+generated/*.html
+twig_cache
