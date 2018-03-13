@@ -39,14 +39,15 @@ class Field {
     }
 
     public function addDivision() {
-        $this->division = new Division( $this->type, $this->tincture2, $this->width, $this->height );
+        $divisionClass = 'Heraldry\\Component\\Division\\' . $this->type;
+        $this->division = new $divisionClass;
     }
 
     public function getElements() {
         $elements = $this->elements;
 
         if ( $this->division ) {
-            $elements[] = $this->division->getElements();
+            $elements[] = $this->division->getElements( $this->tincture2, $this->width, $this->height );
         }
 
         return $elements;

@@ -6,8 +6,8 @@ class FieldFactory {
 
     private $types = [
         'plain',
-        'pale',
-        'fess'
+        'Pale',
+        'Fess'
     ];
 
     public function generateRandom( $width, $height, $tincture1, $tincture2 = false ) {
