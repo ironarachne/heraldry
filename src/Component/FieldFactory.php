@@ -10,6 +10,9 @@ class FieldFactory {
         'Fess',
         'Bend',
         'BendSinister',
+        'Quarterly',
+        'Saltire',
+        'Chevron',
     ];
 
     public function generateRandom( $width, $height, $tincture1, $tincture2 = false ) {

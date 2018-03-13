@@ -7,7 +7,7 @@ use Heraldry\Component\Tincture;
 class Fess implements IDivision {
     
     public function getElements( Tincture $tincture, $width, $height ) {
-        $elements = [
+        $elements = [[
             'name' => 'rect',
             'attributes' => [
                 'x' => '0',
@@ -17,7 +17,7 @@ class Fess implements IDivision {
                 'mask' => 'url(#shieldmask)',
                 'style' => 'fill:' . $tincture->getCode(),
             ]
-        ];
+        ]];
 
         return $elements;
     }

@@ -7,7 +7,7 @@ use Heraldry\Component\Tincture;
 class BendSinister implements IDivision {
 
     public function getElements( Tincture $tincture, $width, $height ) {
-        $elements = [
+        $elements = [[
             'name' => 'polygon',
             'attributes' => [
                 'points' => "0,0 $width,0 0,$height ",
@@ -15,7 +15,7 @@ class BendSinister implements IDivision {
                 'mask' => 'url(#shieldmask)',
                 'style' => 'fill:' . $tincture->getCode(),
             ]
-        ];
+        ]];
 
         return $elements;
     }

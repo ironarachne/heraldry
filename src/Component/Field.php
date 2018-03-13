@@ -47,7 +47,10 @@ class Field {
         $elements = $this->elements;
 
         if ( $this->division ) {
-            $elements[] = $this->division->getElements( $this->tincture2, $this->width, $this->height );
+            $divisionElements = $this->division->getElements( $this->tincture2, $this->width, $this->height );
+            foreach ( $divisionElements as $divisionElement ) {
+                $elements[] = $divisionElement;
+            }
         }
 
         return $elements;

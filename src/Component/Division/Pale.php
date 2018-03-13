@@ -7,7 +7,7 @@ use Heraldry\Component\Tincture;
 class Pale implements IDivision {
 
     public function getElements( Tincture $tincture, $width, $height ) {
-        $elements = [
+        $elements = [[
             'name' => 'rect',
             'attributes' => [
                 'x' => ceil( $width / 2 ),
@@ -17,7 +17,7 @@ class Pale implements IDivision {
                 'mask' => 'url(#shieldmask)',
                 'style' => 'fill:' . $tincture->getCode(),
             ]
-        ];
+        ]];
 
         return $elements;
     }
