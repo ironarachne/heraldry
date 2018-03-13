@@ -3,7 +3,6 @@
 namespace Heraldry\Component;
 
 class Field {
-    private $blazon;
     private $division = false;
     private $elements;
     private $type;
@@ -41,6 +40,14 @@ class Field {
     public function addDivision() {
         $divisionClass = 'Heraldry\\Component\\Division\\' . $this->type;
         $this->division = new $divisionClass;
+    }
+
+    public function getBlazon() {
+        if ( $this->type == 'plain' ) {
+            return $this->tincture1;
+        } else {
+            return $this->division->getBlazon() . ' ' . $this->tincture1->getName() . ' and ' . $this->tincture2->getName();
+        }
     }
 
     public function getElements() {

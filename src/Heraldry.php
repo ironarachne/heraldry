@@ -38,6 +38,11 @@ class Heraldry {
         $this->tincture3 = $tinctureFactory->randomMetal();
     }
 
+    public function getBlazon() {
+        $blazon = $this->field->getBlazon();
+        return $blazon;
+    }
+
     public function renderElements() {
         $elements = $this->field->getElements();
 
@@ -53,10 +58,15 @@ class Heraldry {
         $file = fopen( $fileName, 'w' );
         fwrite( $file, $this->image->asXML() );
         fclose( $file );
+        
+        $blazonFile = fopen( "blazon-$fileName", 'w' );
+        fwrite( $blazonFile, $this->getBlazon() );
+        fclose( $blazonFile );
     }
 
     public function renderToXML() {
         echo $this->image->asXML();
+        echo $this->getBlazon();
     }
 
 }

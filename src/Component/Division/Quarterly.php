@@ -6,6 +6,10 @@ use Heraldry\Component\Tincture;
 
 class Quarterly implements IDivision {
 
+    public function getBlazon() {
+        return 'Quarterly';
+    }
+
     public function getElements( Tincture $tincture, $width, $height ) {
         $elements = [
             [

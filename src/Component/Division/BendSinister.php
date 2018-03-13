@@ -6,6 +6,10 @@ use Heraldry\Component\Tincture;
 
 class BendSinister implements IDivision {
 
+    public function getBlazon() {
+        return 'Per bend sinister';
+    }
+
     public function getElements( Tincture $tincture, $width, $height ) {
         $elements = [[
             'name' => 'polygon',

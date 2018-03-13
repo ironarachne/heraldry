@@ -6,6 +6,10 @@ use Heraldry\Component\Tincture;
 
 class Chevron implements IDivision {
 
+    public function getBlazon() {
+        return 'Per chevron';
+    }
+
     public function getElements( Tincture $tincture, $width, $height ) {
         $midX = ceil( $width / 2 );
         $midY = ceil( $height / 2 );

@@ -5,6 +5,10 @@ namespace Heraldry\Component\Division;
 use Heraldry\Component\Tincture;
 
 class Fess implements IDivision {
+
+    public function getBlazon() {
+        return 'Per fess';
+    }
     
     public function getElements( Tincture $tincture, $width, $height ) {
         $elements = [[

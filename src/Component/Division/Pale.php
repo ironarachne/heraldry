@@ -6,6 +6,10 @@ use Heraldry\Component\Tincture;
 
 class Pale implements IDivision {
 
+    public function getBlazon() {
+        return 'Per pale';
+    }
+
     public function getElements( Tincture $tincture, $width, $height ) {
         $elements = [[
             'name' => 'rect',

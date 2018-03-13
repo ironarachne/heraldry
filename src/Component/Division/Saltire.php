@@ -6,6 +6,10 @@ use Heraldry\Component\Tincture;
 
 class Saltire implements IDivision {
 
+    public function getBlazon() {
+        return 'Per saltire';
+    }
+
     public function getElements( Tincture $tincture, $width, $height ) {
         $midX = ceil( $width / 2 );
         $midY = ceil( $height / 2 );
