@@ -1,8 +1,5 @@
-/vendor/
 .idea
-shield.png
+generated
+makearms
 screenshot.png
-generated/*.svg
-generated/*.txt
-generated/*.html
-twig_cache
+shield.png
