@@ -11,7 +11,7 @@ import (
 
 type Arms struct {
 	FileName string
-	Blazon string
+	Blazon   string
 }
 
 type OutputData struct {
@@ -66,27 +66,27 @@ func main() {
 	for i := 0; i < *numberOfResults; i++ {
 		device := heraldry.Generate()
 		iteration = strconv.Itoa(i)
-		fileName = "device-" + iteration + ".svg" 
+		fileName = "device-" + iteration + ".svg"
 		device.Svg(*filePath + "/" + fileName)
-		
+
 		arms.FileName = fileName
 		arms.Blazon = device.Blazon()
 		outputData.Arms = append(outputData.Arms, arms)
 	}
 
-	if (*createHtmlIndex) {
+	if *createHtmlIndex {
 		writer, err := os.Create(*filePath + "/index.html")
 		if err != nil {
 			fmt.Println(err)
 			return
 		}
-		
+
 		t, err := template.New("htmlIndex").Parse(htmlIndexTemplate)
 		if err != nil {
 			fmt.Println(err)
 			return
 		}
-		
+
 		err = t.Execute(writer, outputData)
 		if err != nil {
 			fmt.Println(err)
