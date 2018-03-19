@@ -38,29 +38,29 @@ type Device struct {
 }
 
 var (
-	Or        = Tincture{"metal", "Or", "#FFFF00"}
-	Argent    = Tincture{"metal", "argent", "#FFFFFF"}
-	Sable     = Tincture{"color", "sable", "#000000"}
-	Gules     = Tincture{"color", "gules", "#EE0000"}
-	Vert      = Tincture{"color", "vert", "#009900"}
-	Azure     = Tincture{"color", "azure", "#0000FF"}
-	Purpure   = Tincture{"color", "purpure", "#CC00CC"}
-	Metals    = [2]Tincture{Or, Argent}
-	Colors    = [5]Tincture{Sable, Gules, Vert, Azure, Purpure}
+	Or                 = Tincture{"metal", "Or", "#FFFF00"}
+	Argent             = Tincture{"metal", "argent", "#FFFFFF"}
+	Sable              = Tincture{"color", "sable", "#000000"}
+	Gules              = Tincture{"color", "gules", "#EE0000"}
+	Vert               = Tincture{"color", "vert", "#009900"}
+	Azure              = Tincture{"color", "azure", "#0000FF"}
+	Purpure            = Tincture{"color", "purpure", "#CC00CC"}
+	Metals             = [2]Tincture{Or, Argent}
+	Colors             = [5]Tincture{Sable, Gules, Vert, Azure, Purpure}
 	AvailableTinctures = [7]Tincture{Or, Argent, Sable, Gules, Vert, Azure, Purpure}
 
-	Bend         = Division{"bend", "Per bend ", Tincture{}}
-	BendSinister = Division{"bendsinister", "Per bend sinister ", Tincture{}}
-	Fess         = Division{"fess", "Per fess ", Tincture{}}
-	Pale         = Division{"pale", "Per pale ", Tincture{}}
-	Plain        = Division{"plain", "", Tincture{}}
-	Quarterly    = Division{"quarterly", "Quarterly ", Tincture{}}
-	Saltire      = Division{"saltire", "Per saltire ", Tincture{}}
-	Chevron      = Division{"chevron", "Per chevron ", Tincture{}}
-	AvailableDivisions    = [8]Division{Bend, BendSinister, Fess, Pale, Plain, Quarterly, Saltire, Chevron}
+	Bend               = Division{"bend", "Per bend ", Tincture{}}
+	BendSinister       = Division{"bendsinister", "Per bend sinister ", Tincture{}}
+	Fess               = Division{"fess", "Per fess ", Tincture{}}
+	Pale               = Division{"pale", "Per pale ", Tincture{}}
+	Plain              = Division{"plain", "", Tincture{}}
+	Quarterly          = Division{"quarterly", "Quarterly ", Tincture{}}
+	Saltire            = Division{"saltire", "Per saltire ", Tincture{}}
+	Chevron            = Division{"chevron", "Per chevron ", Tincture{}}
+	AvailableDivisions = [8]Division{Bend, BendSinister, Fess, Pale, Plain, Quarterly, Saltire, Chevron}
 
-	OrdinaryPale = Charge{"pale", Tincture{}}
-	OrdinaryFess = Charge{"fess", Tincture{}}
+	OrdinaryPale     = Charge{"pale", Tincture{}}
+	OrdinaryFess     = Charge{"fess", Tincture{}}
 	AvailableCharges = [2]Charge{OrdinaryPale, OrdinaryFess}
 )
 
@@ -93,7 +93,7 @@ func randomTinctureMetal() Tincture {
 
 func randomComplementaryTincture(t Tincture) Tincture {
 	rand.Seed(time.Now().UnixNano())
-	
+
 	var availableTinctures []Tincture
 	if t.Type == "color" {
 		for _, color := range Colors {
@@ -138,7 +138,6 @@ func Generate() Device {
 	fieldTincture1 := randomTincture()
 	fieldTincture2 := randomComplementaryTincture(fieldTincture1)
 	chargeTincture := randomContrastingTincture(fieldTincture1)
-	
 
 	division := randomDivision()
 	division.Tincture = fieldTincture2
@@ -170,7 +169,7 @@ func (d Device) Blazon() string {
 		blazon += " and " + d.Field.Division.Tincture.Name
 	}
 
-	if (len(d.Charges) > 0) {
+	if len(d.Charges) > 0 {
 		blazon += ", a " + d.Charges[0].Name + " " + d.Charges[0].Tincture.Name
 	}
 
