@@ -39,6 +39,17 @@ func main() {
 		font-style: italic;
 		text-align: center;
 	}
+
+	.device {
+		margin: 1rem;
+		width: 400px;
+	}
+
+	img {
+		margin: 0 auto;
+		height: 420px;
+		width: 320px;
+	}
 	</style>
 </head>
 <body>

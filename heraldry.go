@@ -47,7 +47,7 @@ var (
 	Purpure   = Tincture{"color", "purpure", "#CC00CC"}
 	Metals    = [2]Tincture{Or, Argent}
 	Colors    = [5]Tincture{Sable, Gules, Vert, Azure, Purpure}
-	Tinctures = [7]Tincture{Or, Argent, Sable, Gules, Vert, Azure, Purpure}
+	AvailableTinctures = [7]Tincture{Or, Argent, Sable, Gules, Vert, Azure, Purpure}
 
 	Bend         = Division{"bend", "Per bend ", Tincture{}}
 	BendSinister = Division{"bendsinister", "Per bend sinister ", Tincture{}}
@@ -57,40 +57,102 @@ var (
 	Quarterly    = Division{"quarterly", "Quarterly ", Tincture{}}
 	Saltire      = Division{"saltire", "Per saltire ", Tincture{}}
 	Chevron      = Division{"chevron", "Per chevron ", Tincture{}}
-	Divisions    = [8]Division{Bend, BendSinister, Fess, Pale, Plain, Quarterly, Saltire, Chevron}
+	AvailableDivisions    = [8]Division{Bend, BendSinister, Fess, Pale, Plain, Quarterly, Saltire, Chevron}
+
+	OrdinaryPale = Charge{"pale", Tincture{}}
+	OrdinaryFess = Charge{"fess", Tincture{}}
+	AvailableCharges = [2]Charge{OrdinaryPale, OrdinaryFess}
 )
+
+func randomCharge() Charge {
+	rand.Seed(time.Now().UnixNano())
+	return AvailableCharges[rand.Intn(len(AvailableCharges))]
+}
 
 func randomDivision() Division {
 	rand.Seed(time.Now().UnixNano())
-	return Divisions[rand.Intn(len(Divisions))]
+	return AvailableDivisions[rand.Intn(len(AvailableDivisions))]
 }
 
 func randomTincture() Tincture {
 	rand.Seed(time.Now().UnixNano())
-	return Tinctures[rand.Intn(len(Tinctures))]
+	return AvailableTinctures[rand.Intn(len(AvailableTinctures))]
+}
+
+func randomTinctureColor() Tincture {
+	rand.Seed(time.Now().UnixNano())
+	t := Colors[rand.Intn(len(Colors))]
+	return t
+}
+
+func randomTinctureMetal() Tincture {
+	rand.Seed(time.Now().UnixNano())
+	t := Metals[rand.Intn(len(Metals))]
+	return t
+}
+
+func randomComplementaryTincture(t Tincture) Tincture {
+	rand.Seed(time.Now().UnixNano())
+	
+	var availableTinctures []Tincture
+	if t.Type == "color" {
+		for _, color := range Colors {
+			if color.Name != t.Name {
+				availableTinctures = append(availableTinctures, color)
+			}
+		}
+	} else {
+		for _, metal := range Metals {
+			if metal.Name != t.Name {
+				availableTinctures = append(availableTinctures, metal)
+			}
+		}
+	}
+	t2 := availableTinctures[rand.Intn(len(availableTinctures))]
+
+	return t2
 }
 
 func randomContrastingTincture(t Tincture) Tincture {
 	rand.Seed(time.Now().UnixNano())
 	t2 := Tincture{}
 	if t.Type == "metal" {
-		t2 = Colors[rand.Intn(len(Colors))]
+		t2 = randomTinctureColor()
 	} else {
-		t2 = Metals[rand.Intn(len(Metals))]
+		t2 = randomTinctureMetal()
 	}
 
 	return t2
 }
 
+func shallWeIncludeCharges() bool {
+	rand.Seed(time.Now().UnixNano())
+	someRandomValue := rand.Intn(10)
+	if someRandomValue > 2 {
+		return true
+	}
+	return false
+}
+
 func Generate() Device {
 	fieldTincture1 := randomTincture()
-	fieldTincture2 := randomContrastingTincture(fieldTincture1)
+	fieldTincture2 := randomComplementaryTincture(fieldTincture1)
+	chargeTincture := randomContrastingTincture(fieldTincture1)
+	
 
 	division := randomDivision()
 	division.Tincture = fieldTincture2
 
+	var charges []Charge
+
+	if shallWeIncludeCharges() {
+		charge := randomCharge()
+		charge.Tincture = chargeTincture
+		charges = append(charges, charge)
+	}
+
 	f := Field{Division: division, Tincture: fieldTincture1}
-	d := Device{Field: f}
+	d := Device{Field: f, Charges: charges}
 
 	return d
 }
@@ -106,6 +168,10 @@ func (d Device) Blazon() string {
 
 	if d.Field.Division.Name != "plain" {
 		blazon += " and " + d.Field.Division.Tincture.Name
+	}
+
+	if (len(d.Charges) > 0) {
+		blazon += ", a " + d.Charges[0].Name + " " + d.Charges[0].Tincture.Name
 	}
 
 	return blazon
@@ -148,6 +214,14 @@ func (d Device) Svg(fileName string) {
 	case "saltire":
 		canvas.Polygon([]int{0, int(width / 2), 0}, []int{0, int(height / 2), height}, "fill:"+d.Field.Division.Tincture.Hexcode)
 		canvas.Polygon([]int{width, int(width / 2), width}, []int{0, int(height / 2), height}, "fill:"+d.Field.Division.Tincture.Hexcode)
+	}
+	for _, charge := range d.Charges {
+		switch charge.Name {
+		case "pale":
+			canvas.Rect(int(width/3), 0, int(width/3), height, "fill:"+charge.Tincture.Hexcode)
+		case "fess":
+			canvas.Rect(0, int(height/3), width, int(height/3), "fill:"+charge.Tincture.Hexcode)
+		}
 	}
 	canvas.Path("m10.273 21.598v151.22c0 96.872 89.031 194.34 146.44 240.09 57.414-45.758 146.44-143.22 146.44-240.09v-151.22h-292.89z", "stroke:#000000;stroke-width:4;fill:none")
 	canvas.Gend()
