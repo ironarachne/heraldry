@@ -61,7 +61,15 @@ var (
 
 	OrdinaryPale     = Charge{"pale", Tincture{}}
 	OrdinaryFess     = Charge{"fess", Tincture{}}
-	AvailableCharges = [2]Charge{OrdinaryPale, OrdinaryFess}
+	OrdinaryCross    = Charge{"cross", Tincture{}}
+	OrdinaryBend     = Charge{"bend", Tincture{}}
+	OrdinarySaltire  = Charge{"saltire", Tincture{}}
+	OrdinaryChevron  = Charge{"chevron", Tincture{}}
+	OrdinaryChief    = Charge{"chief", Tincture{}}
+	OrdinaryPile     = Charge{"pile", Tincture{}}
+	OrdinaryPall     = Charge{"pall", Tincture{}}
+	OrdinaryBordure  = Charge{"bordure", Tincture{}}
+	AvailableCharges = [10]Charge{OrdinaryPale, OrdinaryFess, OrdinaryCross, OrdinaryBend, OrdinarySaltire, OrdinaryChevron, OrdinaryChief, OrdinaryPile, OrdinaryPall, OrdinaryBordure}
 )
 
 func randomCharge() Charge {
@@ -220,6 +228,30 @@ func (d Device) Svg(fileName string) {
 			canvas.Rect(int(width/3), 0, int(width/3), height, "fill:"+charge.Tincture.Hexcode)
 		case "fess":
 			canvas.Rect(0, int(height/3), width, int(height/3), "fill:"+charge.Tincture.Hexcode)
+		case "cross":
+			canvas.Rect(int(width/3), 0, int(width/3), height, "fill:"+charge.Tincture.Hexcode)
+			canvas.Rect(0, int(height/3), width, int(height/3), "fill:"+charge.Tincture.Hexcode)
+		case "bend":
+			canvas.TranslateRotate(-100, 135, -45)
+			canvas.Rect(int(width/3), 0, int(width/3), height, "fill:"+charge.Tincture.Hexcode)
+			canvas.Gend()
+		case "saltire":
+			canvas.TranslateRotate(-100, 135, -45)
+			canvas.Rect(int(width/3), 0, int(width/3), height, "fill:"+charge.Tincture.Hexcode)
+			canvas.Gend()
+			canvas.TranslateRotate(200, -100, 45)
+			canvas.Rect(int(width/3), 0, int(width/3), height, "fill:"+charge.Tincture.Hexcode)
+			canvas.Gend()
+		case "chevron":
+			canvas.Polygon([]int{0, int(width / 2), width, width, int(width / 2), 0}, []int{height - int(height/6), int(height / 6), height - int(height/6), height - int(height/6) + 150, int(height/6) + 150, height - int(height/6) + 150}, "fill:"+charge.Tincture.Hexcode)
+		case "chief":
+			canvas.Rect(0, 0, width, int(height/3), "fill:"+charge.Tincture.Hexcode)
+		case "pile":
+			canvas.Polygon([]int{0, width, int(width / 2)}, []int{0, 0, int(height / 2)}, "fill:"+charge.Tincture.Hexcode)
+		case "pall":
+			canvas.Polygon([]int{0, 30, int(width / 2), width - 30, width, width, int(width/2) + 30, int(width/2) + 30, int(width / 2), int(width/2) - 30, int(width/2) - 30, 0}, []int{0, 0, int(height/2) - 30, 0, 0, 45, int(height/2) + 30, height - 30, height, height - 30, int(height/2) + 30, 45}, "fill:"+charge.Tincture.Hexcode)
+		case "bordure":
+			canvas.Path("m10.273 21.598v151.22c0 96.872 89.031 194.34 146.44 240.09 57.414-45.758 146.44-143.22 146.44-240.09v-151.22h-292.89z", "stroke:"+charge.Tincture.Hexcode+";stroke-width:100;fill:none")
 		}
 	}
 	canvas.Path("m10.273 21.598v151.22c0 96.872 89.031 194.34 146.44 240.09 57.414-45.758 146.44-143.22 146.44-240.09v-151.22h-292.89z", "stroke:#000000;stroke-width:4;fill:none")
