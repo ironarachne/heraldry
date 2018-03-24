@@ -90,13 +90,23 @@ func RenderToSvg(device Device, fileName string, width int, height int) {
 				[]int{0, 0, centerY - saltireHalfWidth, 0, 0, saltireHalfWidth, centerY, height - saltireHalfWidth, height, height, centerY + saltireHalfWidth, height, height, height - saltireHalfWidth, centerY, saltireHalfWidth},
 				"fill:"+charge.Tincture.Hexcode)
 		case "chevron":
-			canvas.Polygon([]int{0, int(width / 2), width, width, int(width / 2), 0}, []int{height - int(height/6), int(height / 6), height - int(height/6), height - int(height/6) + 150, int(height/6) + 150, height - int(height/6) + 150}, "fill:"+charge.Tincture.Hexcode)
+			canvas.Polygon(
+				[]int{0, int(width / 2), width, width, int(width / 2), 0},
+				[]int{height - int(height/6), int(height / 6), height - int(height/6), height - int(height/6) + 150, int(height/6) + 150, height - int(height/6) + 150},
+				"fill:"+charge.Tincture.Hexcode)
 		case "chief":
 			canvas.Rect(0, 0, width, int(height/3), "fill:"+charge.Tincture.Hexcode)
 		case "pile":
-			canvas.Polygon([]int{0, width, int(width / 2)}, []int{0, 0, int(height / 2)}, "fill:"+charge.Tincture.Hexcode)
+			canvas.Polygon(
+				[]int{0, width, int(width / 2)},
+				[]int{0, 0, int(height / 2)},
+				"fill:"+charge.Tincture.Hexcode)
 		case "pall":
-			canvas.Polygon([]int{0, 30, int(width / 2), width - 30, width, width, int(width/2) + 30, int(width/2) + 30, int(width / 2), int(width/2) - 30, int(width/2) - 30, 0}, []int{0, 0, int(height/2) - 30, 0, 0, 45, int(height/2) + 30, height - 30, height, height - 30, int(height/2) + 30, 45}, "fill:"+charge.Tincture.Hexcode)
+			pallHalfWidth := 40
+			canvas.Polygon(
+				[]int{0, pallHalfWidth, centerX, width - pallHalfWidth, width, width, centerX + pallHalfWidth - int(pallHalfWidth/3), centerX + pallHalfWidth - int(pallHalfWidth/3), centerX - pallHalfWidth + int(pallHalfWidth/3), centerX - pallHalfWidth + int(pallHalfWidth/3), 0},
+				[]int{0, 0, centerY - pallHalfWidth, 0, 0, pallHalfWidth, centerY + pallHalfWidth - int(pallHalfWidth/3), height, height, centerY + pallHalfWidth - int(pallHalfWidth/3), pallHalfWidth},
+				"fill:"+charge.Tincture.Hexcode)
 		case "bordure":
 			canvas.Path("m10.273 21.598v151.22c0 96.872 89.031 194.34 146.44 240.09 57.414-45.758 146.44-143.22 146.44-240.09v-151.22h-292.89z", "stroke:"+charge.Tincture.Hexcode+";stroke-width:100;fill:none")
 		}
