@@ -78,10 +78,10 @@ func main() {
 		device := heraldry.Generate()
 		iteration = strconv.Itoa(i)
 		fileName = "device-" + iteration + ".svg"
-		device.Svg(*filePath + "/" + fileName)
+		heraldry.RenderToSvg(device, *filePath + "/" + fileName, 320, 420)
 
 		arms.FileName = fileName
-		arms.Blazon = device.Blazon()
+		arms.Blazon = heraldry.RenderToBlazon(device)
 		outputData.Arms = append(outputData.Arms, arms)
 	}
 
