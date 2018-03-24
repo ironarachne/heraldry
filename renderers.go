@@ -74,8 +74,11 @@ func RenderToSvg(device Device, fileName string, width int, height int) {
 		case "fess":
 			canvas.Rect(0, int(height/3), width, int(height/3), "fill:"+charge.Tincture.Hexcode)
 		case "cross":
-			canvas.Rect(int(width/3), 0, int(width/3), height, "fill:"+charge.Tincture.Hexcode)
-			canvas.Rect(0, int(height/3), width, int(height/3), "fill:"+charge.Tincture.Hexcode)
+			crossHalfWidth := 40
+			canvas.Polygon(
+				[]int{centerX - crossHalfWidth, centerX + crossHalfWidth, centerX + crossHalfWidth, width, width, centerX + crossHalfWidth, centerX + crossHalfWidth, centerX - crossHalfWidth, centerX - crossHalfWidth, 0, 0, centerX - crossHalfWidth},
+				[]int{0, 0, centerY - crossHalfWidth, centerY - crossHalfWidth, centerY + crossHalfWidth, centerY + crossHalfWidth, height, height, centerY + crossHalfWidth, centerY + crossHalfWidth, centerY - crossHalfWidth, centerY - crossHalfWidth},
+				"fill:"+charge.Tincture.Hexcode)
 		case "bend":
 			canvas.TranslateRotate(-100, 135, -45)
 			canvas.Rect(int(width/3), 0, int(width/3), height, "fill:"+charge.Tincture.Hexcode)
