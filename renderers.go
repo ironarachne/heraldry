@@ -93,7 +93,7 @@ func RenderToSvg(device Device, fileName string, width int, height int) {
 			chevronHalfWidth := 40
 			canvas.Polygon(
 				[]int{0, centerX, width, width, centerX, 0},
-				[]int{centerY + (2 * chevronHalfWidth), centerY - (2 * chevronHalfWidth), centerY + (2 * chevronHalfWidth), centerY + (4 * chevronHalfWidth), centerY, centerY + (4 * chevronHalfWidth)},
+				[]int{height - int(height/4), height - int(height/3) - (3 * chevronHalfWidth), height - int(height/4), height - int(height/4) + (2 * chevronHalfWidth), height - int(height/3) - chevronHalfWidth, height - int(height/4) + (2 * chevronHalfWidth)},
 				"fill:"+charge.Tincture.Hexcode)
 		case "chief":
 			canvas.Rect(0, 0, width, int(height/3), "fill:"+charge.Tincture.Hexcode)
