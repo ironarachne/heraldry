@@ -65,7 +65,8 @@ var (
 	OrdinaryPall     = Charge{"pall", Tincture{}}
 	OrdinaryBordure  = Charge{"bordure", Tincture{}}
 	OrdinaryLozenge  = Charge{"lozenge", Tincture{}}
-	AvailableCharges = [11]Charge{OrdinaryPale, OrdinaryFess, OrdinaryCross, OrdinaryBend, OrdinarySaltire, OrdinaryChevron, OrdinaryChief, OrdinaryPile, OrdinaryPall, OrdinaryBordure, OrdinaryLozenge}
+	OrdinaryRoundel  = Charge{"roundel", Tincture{}}
+	AvailableCharges = [12]Charge{OrdinaryPale, OrdinaryFess, OrdinaryCross, OrdinaryBend, OrdinarySaltire, OrdinaryChevron, OrdinaryChief, OrdinaryPile, OrdinaryPall, OrdinaryBordure, OrdinaryLozenge, OrdinaryRoundel}
 )
 
 func randomCharge() Charge {

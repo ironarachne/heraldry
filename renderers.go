@@ -116,6 +116,13 @@ func RenderToSvg(device Device, fileName string, width int, height int) {
 				[]int{centerX, centerX + lozengeHalfWidth, centerX, centerX - lozengeHalfWidth},
 				[]int{centerY - lozengeHalfWidth - int(lozengeHalfWidth/2), centerY, centerY + lozengeHalfWidth + int(lozengeHalfWidth/2), centerY},
 				"fill:"+charge.Tincture.Hexcode)
+		case "roundel":
+			roundelRadius := 100
+			canvas.Circle(
+				int(width/2),
+				int(height/2),
+				roundelRadius,
+				"fill:"+charge.Tincture.Hexcode)
 		}
 	}
 	canvas.Path("m10.273 21.598v151.22c0 96.872 89.031 194.34 146.44 240.09 57.414-45.758 146.44-143.22 146.44-240.09v-151.22h-292.89z", "stroke:#000000;stroke-width:4;fill:none")
