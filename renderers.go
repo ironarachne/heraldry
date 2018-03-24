@@ -36,6 +36,9 @@ func RenderToSvg(device Device, fileName string, width int, height int) {
 		return
 	}
 
+	centerX := int(width/2)
+	centerY := int(height/2)
+
 	canvas := svg.New(writer)
 	canvas.Start(width, height, "mask='url(#shieldmask)'")
 	canvas.Def()
@@ -78,12 +81,11 @@ func RenderToSvg(device Device, fileName string, width int, height int) {
 			canvas.Rect(int(width/3), 0, int(width/3), height, "fill:"+charge.Tincture.Hexcode)
 			canvas.Gend()
 		case "saltire":
-			canvas.TranslateRotate(-100, 135, -45)
-			canvas.Rect(int(width/3), 0, int(width/3), height, "fill:"+charge.Tincture.Hexcode)
-			canvas.Gend()
-			canvas.TranslateRotate(200, -100, 45)
-			canvas.Rect(int(width/3), 0, int(width/3), height, "fill:"+charge.Tincture.Hexcode)
-			canvas.Gend()
+			saltireHalfWidth := 30
+			canvas.Polygon(
+				[]int{0, saltireHalfWidth, centerX, width-saltireHalfWidth, width, width, centerX+saltireHalfWidth, width, width, width-saltireHalfWidth, centerX, saltireHalfWidth, 0, 0, centerX-saltireHalfWidth, 0}, 
+				[]int{0, 0, centerY-saltireHalfWidth, 0, 0, saltireHalfWidth, centerY, height-saltireHalfWidth, height, height, centerY+saltireHalfWidth, height, height, height-saltireHalfWidth, centerY, saltireHalfWidth}, 
+				"fill:"+charge.Tincture.Hexcode)
 		case "chevron":
 			canvas.Polygon([]int{0, int(width / 2), width, width, int(width / 2), 0}, []int{height - int(height/6), int(height / 6), height - int(height/6), height - int(height/6) + 150, int(height/6) + 150, height - int(height/6) + 150}, "fill:"+charge.Tincture.Hexcode)
 		case "chief":
