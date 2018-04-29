@@ -3,24 +3,11 @@ package heraldry
 import (
 	"fmt"
 	"io"
-	"io/ioutil"
 	"os"
 	"strings"
 
 	"github.com/ajstarks/svgo"
 )
-
-func check(e error) {
-	if e != nil {
-		panic(e)
-	}
-}
-
-func fetchChargePathData(charge string) string {
-	pathData, err := ioutil.ReadFile("charges/" + charge)
-	check(err)
-	return string(pathData)
-}
 
 // RenderToBlazon renders a device as its blazon and returns it.
 func RenderToBlazon(device Device) string {
@@ -130,8 +117,7 @@ func RenderToSvg(device Device, fileName string, width int, height int) {
 				[]int{0, 0, centerY - pallHalfWidth, 0, 0, pallHalfWidth, centerY + pallHalfWidth - int(pallHalfWidth/3), height, height, centerY + pallHalfWidth - int(pallHalfWidth/3), pallHalfWidth},
 				"fill:"+charge.Tincture.Hexcode)
 		case "bordure":
-			pathData := fetchChargePathData("bordure")
-			canvas.Path(pathData, "stroke:"+charge.Tincture.Hexcode+";stroke-width:100;fill:none")
+			renderBordureToSvg(canvas, charge.Tincture.Hexcode)
 		case "lozenge":
 			lozengeHalfWidth := 80
 			canvas.Polygon(
@@ -146,33 +132,13 @@ func RenderToSvg(device Device, fileName string, width int, height int) {
 				roundelRadius,
 				"fill:"+charge.Tincture.Hexcode)
 		case "eagle-displayed":
-			pathData0 := fetchChargePathData("eagle-displayed-0")
-			pathData1 := fetchChargePathData("eagle-displayed-1")
-			canvas.Translate(10, 50)
-			canvas.Path(pathData0, "fill:"+charge.Tincture.Hexcode+";fill-opacity:1")
-			canvas.Path(pathData1, "fill:"+lineColor)
-			canvas.Gend()
+			renderEagleDisplayedToSvg(canvas, charge.Tincture.Hexcode, lineColor)
 		case "dragon-passant":
-			pathData0 := fetchChargePathData("dragon-passant-0")
-			pathData1 := fetchChargePathData("dragon-passant-1")
-			canvas.Translate(10, 50)
-			canvas.Path(pathData0, "fill:"+charge.Tincture.Hexcode+";fill-opacity:1")
-			canvas.Path(pathData1, "fill:"+lineColor)
-			canvas.Gend()
+			renderDragonPassantToSvg(canvas, charge.Tincture.Hexcode, lineColor)
 		case "gryphon-passant":
-			pathData0 := fetchChargePathData("gryphon-passant-0")
-			pathData1 := fetchChargePathData("gryphon-passant-1")
-			canvas.Translate(10, 50)
-			canvas.Path(pathData0, "fill:"+charge.Tincture.Hexcode+";fill-opacity:1")
-			canvas.Path(pathData1, "fill:"+lineColor)
-			canvas.Gend()
+			renderGryphonPassantToSvg(canvas, charge.Tincture.Hexcode, lineColor)
 		case "fox-passant":
-			pathData0 := fetchChargePathData("fox-passant-0")
-			pathData1 := fetchChargePathData("fox-passant-1")
-			canvas.Translate(10, 50)
-			canvas.Path(pathData0, "fill:"+charge.Tincture.Hexcode+";fill-opacity:1")
-			canvas.Path(pathData1, "fill:"+lineColor)
-			canvas.Gend()
+			renderFoxPassantToSvg(canvas, charge.Tincture.Hexcode, lineColor)
 		}
 
 	}
