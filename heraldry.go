@@ -12,7 +12,8 @@ type Tincture struct {
 }
 
 type Charge struct {
-	Name string
+	Identifier string
+	Name       string
 	Tincture
 }
 
@@ -54,19 +55,23 @@ var (
 	Chevron            = Division{"chevron", "Per chevron ", Tincture{}}
 	AvailableDivisions = [8]Division{Bend, BendSinister, Fess, Pale, Plain, Quarterly, Saltire, Chevron}
 
-	OrdinaryPale     = Charge{"pale", Tincture{}}
-	OrdinaryFess     = Charge{"fess", Tincture{}}
-	OrdinaryCross    = Charge{"cross", Tincture{}}
-	OrdinaryBend     = Charge{"bend", Tincture{}}
-	OrdinarySaltire  = Charge{"saltire", Tincture{}}
-	OrdinaryChevron  = Charge{"chevron", Tincture{}}
-	OrdinaryChief    = Charge{"chief", Tincture{}}
-	OrdinaryPile     = Charge{"pile", Tincture{}}
-	OrdinaryPall     = Charge{"pall", Tincture{}}
-	OrdinaryBordure  = Charge{"bordure", Tincture{}}
-	OrdinaryLozenge  = Charge{"lozenge", Tincture{}}
-	OrdinaryRoundel  = Charge{"roundel", Tincture{}}
-	AvailableCharges = [12]Charge{OrdinaryPale, OrdinaryFess, OrdinaryCross, OrdinaryBend, OrdinarySaltire, OrdinaryChevron, OrdinaryChief, OrdinaryPile, OrdinaryPall, OrdinaryBordure, OrdinaryLozenge, OrdinaryRoundel}
+	OrdinaryPale     = Charge{"pale", "pale", Tincture{}}
+	OrdinaryFess     = Charge{"fess", "fess", Tincture{}}
+	OrdinaryCross    = Charge{"cross", "cross", Tincture{}}
+	OrdinaryBend     = Charge{"bend", "bend", Tincture{}}
+	OrdinarySaltire  = Charge{"saltire", "saltire", Tincture{}}
+	OrdinaryChevron  = Charge{"chevron", "chevron", Tincture{}}
+	OrdinaryChief    = Charge{"chief", "chief", Tincture{}}
+	OrdinaryPile     = Charge{"pile", "pile", Tincture{}}
+	OrdinaryPall     = Charge{"pall", "pall", Tincture{}}
+	OrdinaryBordure  = Charge{"bordure", "bordure", Tincture{}}
+	OrdinaryLozenge  = Charge{"lozenge", "lozenge", Tincture{}}
+	OrdinaryRoundel  = Charge{"roundel", "roundel", Tincture{}}
+	EagleDisplayed   = Charge{"eagle-displayed", "eagle displayed", Tincture{}}
+	DragonPassant    = Charge{"dragon-passant", "dragon passant", Tincture{}}
+	GryphonPassant   = Charge{"gryphon-passant", "gryphon passant", Tincture{}}
+	FoxPassant       = Charge{"fox-passant", "fox passant", Tincture{}}
+	AvailableCharges = [16]Charge{OrdinaryPale, OrdinaryFess, OrdinaryCross, OrdinaryBend, OrdinarySaltire, OrdinaryChevron, OrdinaryChief, OrdinaryPile, OrdinaryPall, OrdinaryBordure, OrdinaryLozenge, OrdinaryRoundel, EagleDisplayed, DragonPassant, GryphonPassant, FoxPassant}
 )
 
 func randomCharge() Charge {
@@ -139,6 +144,7 @@ func shallWeIncludeCharges() bool {
 	return false
 }
 
+// Generate procedurally generates a random heraldic device and returns it.
 func Generate() Device {
 	fieldTincture1 := randomTincture()
 	fieldTincture2 := randomComplementaryTincture(fieldTincture1)

@@ -2,12 +2,27 @@ package heraldry
 
 import (
 	"fmt"
-	"github.com/ajstarks/svgo"
 	"io"
+	"io/ioutil"
 	"os"
 	"strings"
+
+	"github.com/ajstarks/svgo"
 )
 
+func check(e error) {
+	if e != nil {
+		panic(e)
+	}
+}
+
+func fetchChargePathData(charge string) string {
+	pathData, err := ioutil.ReadFile("charges/" + charge)
+	check(err)
+	return string(pathData)
+}
+
+// RenderToBlazon renders a device as its blazon and returns it.
 func RenderToBlazon(device Device) string {
 	blazon := ""
 	if device.Field.Division.Name == "plain" {
@@ -28,6 +43,7 @@ func RenderToBlazon(device Device) string {
 	return blazon
 }
 
+// RenderToSvg renders a device as SVG and writes to fileName.
 func RenderToSvg(device Device, fileName string, width int, height int) {
 	var writer io.WriteCloser
 	writer, err := os.Create(fileName)
@@ -38,6 +54,8 @@ func RenderToSvg(device Device, fileName string, width int, height int) {
 
 	centerX := int(width / 2)
 	centerY := int(height / 2)
+
+	lineColor := "#000000"
 
 	canvas := svg.New(writer)
 	canvas.Start(width, height, "mask='url(#shieldmask)'")
@@ -68,7 +86,10 @@ func RenderToSvg(device Device, fileName string, width int, height int) {
 		canvas.Polygon([]int{width, int(width / 2), width}, []int{0, int(height / 2), height}, "fill:"+device.Field.Division.Tincture.Hexcode)
 	}
 	for _, charge := range device.Charges {
-		switch charge.Name {
+		if charge.Tincture.Name == "sable" {
+			lineColor = "#FFFFFF"
+		}
+		switch charge.Identifier {
 		case "pale":
 			canvas.Rect(int(width/3), 0, int(width/3), height, "fill:"+charge.Tincture.Hexcode)
 		case "fess":
@@ -109,7 +130,8 @@ func RenderToSvg(device Device, fileName string, width int, height int) {
 				[]int{0, 0, centerY - pallHalfWidth, 0, 0, pallHalfWidth, centerY + pallHalfWidth - int(pallHalfWidth/3), height, height, centerY + pallHalfWidth - int(pallHalfWidth/3), pallHalfWidth},
 				"fill:"+charge.Tincture.Hexcode)
 		case "bordure":
-			canvas.Path("m10.273 21.598v151.22c0 96.872 89.031 194.34 146.44 240.09 57.414-45.758 146.44-143.22 146.44-240.09v-151.22h-292.89z", "stroke:"+charge.Tincture.Hexcode+";stroke-width:100;fill:none")
+			pathData := fetchChargePathData("bordure")
+			canvas.Path(pathData, "stroke:"+charge.Tincture.Hexcode+";stroke-width:100;fill:none")
 		case "lozenge":
 			lozengeHalfWidth := 80
 			canvas.Polygon(
@@ -123,7 +145,36 @@ func RenderToSvg(device Device, fileName string, width int, height int) {
 				int(height/2),
 				roundelRadius,
 				"fill:"+charge.Tincture.Hexcode)
+		case "eagle-displayed":
+			pathData0 := fetchChargePathData("eagle-displayed-0")
+			pathData1 := fetchChargePathData("eagle-displayed-1")
+			canvas.Translate(10, 50)
+			canvas.Path(pathData0, "fill:"+charge.Tincture.Hexcode+";fill-opacity:1")
+			canvas.Path(pathData1, "fill:"+lineColor)
+			canvas.Gend()
+		case "dragon-passant":
+			pathData0 := fetchChargePathData("dragon-passant-0")
+			pathData1 := fetchChargePathData("dragon-passant-1")
+			canvas.Translate(10, 50)
+			canvas.Path(pathData0, "fill:"+charge.Tincture.Hexcode+";fill-opacity:1")
+			canvas.Path(pathData1, "fill:"+lineColor)
+			canvas.Gend()
+		case "gryphon-passant":
+			pathData0 := fetchChargePathData("gryphon-passant-0")
+			pathData1 := fetchChargePathData("gryphon-passant-1")
+			canvas.Translate(10, 50)
+			canvas.Path(pathData0, "fill:"+charge.Tincture.Hexcode+";fill-opacity:1")
+			canvas.Path(pathData1, "fill:"+lineColor)
+			canvas.Gend()
+		case "fox-passant":
+			pathData0 := fetchChargePathData("fox-passant-0")
+			pathData1 := fetchChargePathData("fox-passant-1")
+			canvas.Translate(10, 50)
+			canvas.Path(pathData0, "fill:"+charge.Tincture.Hexcode+";fill-opacity:1")
+			canvas.Path(pathData1, "fill:"+lineColor)
+			canvas.Gend()
 		}
+
 	}
 	canvas.Path("m10.273 21.598v151.22c0 96.872 89.031 194.34 146.44 240.09 57.414-45.758 146.44-143.22 146.44-240.09v-151.22h-292.89z", "stroke:#000000;stroke-width:4;fill:none")
 	canvas.Gend()
