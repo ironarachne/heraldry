@@ -71,7 +71,8 @@ var (
 	DragonPassant    = Charge{"dragon-passant", "dragon passant", Tincture{}}
 	GryphonPassant   = Charge{"gryphon-passant", "gryphon passant", Tincture{}}
 	FoxPassant       = Charge{"fox-passant", "fox passant", Tincture{}}
-	AvailableCharges = [16]Charge{OrdinaryPale, OrdinaryFess, OrdinaryCross, OrdinaryBend, OrdinarySaltire, OrdinaryChevron, OrdinaryChief, OrdinaryPile, OrdinaryPall, OrdinaryBordure, OrdinaryLozenge, OrdinaryRoundel, EagleDisplayed, DragonPassant, GryphonPassant, FoxPassant}
+	LionRampant      = Charge{"lion-rampant", "lion rampant", Tincture{}}
+	AvailableCharges = [17]Charge{OrdinaryPale, OrdinaryFess, OrdinaryCross, OrdinaryBend, OrdinarySaltire, OrdinaryChevron, OrdinaryChief, OrdinaryPile, OrdinaryPall, OrdinaryBordure, OrdinaryLozenge, OrdinaryRoundel, EagleDisplayed, DragonPassant, GryphonPassant, FoxPassant, LionRampant}
 )
 
 func randomCharge() Charge {

@@ -139,6 +139,8 @@ func RenderToSvg(device Device, fileName string, width int, height int) {
 			renderGryphonPassantToSvg(canvas, charge.Tincture.Hexcode, lineColor)
 		case "fox-passant":
 			renderFoxPassantToSvg(canvas, charge.Tincture.Hexcode, lineColor)
+		case "lion-rampant":
+			renderLionRampantToSvg(canvas, charge.Tincture.Hexcode)
 		}
 
 	}
