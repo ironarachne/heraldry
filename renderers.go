@@ -139,8 +139,118 @@ func RenderToSvg(device Device, fileName string, width int, height int) {
 			renderGryphonPassantToSvg(canvas, charge.Tincture.Hexcode, lineColor)
 		case "fox-passant":
 			renderFoxPassantToSvg(canvas, charge.Tincture.Hexcode, lineColor)
+		case "antelope-passant":
+			renderAntelopePassantToSvg(canvas, charge.Tincture.Hexcode, lineColor)
+		case "antelope-rampant":
+			renderAntelopeRampantToSvg(canvas, charge.Tincture.Hexcode, lineColor)
+		case "bat-volant":
+			renderBatVolantToSvg(canvas, charge.Tincture.Hexcode, lineColor)
+		case "battleaxe":
+			renderBattleaxeToSvg(canvas, charge.Tincture.Hexcode, lineColor)
+		case "bear-head-couped":
+			renderBearHeadCoupedToSvg(canvas, charge.Tincture.Hexcode, lineColor)
+		case "bear-rampant":
+			renderBearRampantToSvg(canvas, charge.Tincture.Hexcode, lineColor)
+		case "bear-statant":
+			renderBearStatantToSvg(canvas, charge.Tincture.Hexcode, lineColor)
+		case "bee-volant":
+			renderBeeVolantToSvg(canvas, charge.Tincture.Hexcode, lineColor)
+		case "bell":
+			renderBellToSvg(canvas, charge.Tincture.Hexcode, lineColor)
+		case "boar-head-erased":
+			renderBoarHeadErasedToSvg(canvas, charge.Tincture.Hexcode, lineColor)
+		case "boar-passant":
+			renderBoarPassantToSvg(canvas, charge.Tincture.Hexcode, lineColor)
+		case "boar-rampant":
+			renderBoarRampantToSvg(canvas, charge.Tincture.Hexcode, lineColor)
+		case "bugle-horn":
+			renderBugleHornToSvg(canvas, charge.Tincture.Hexcode, lineColor)
+		case "bull-passant":
+			renderBullPassantToSvg(canvas, charge.Tincture.Hexcode, lineColor)
+		case "bull-rampant":
+			renderBullRampantToSvg(canvas, charge.Tincture.Hexcode, lineColor)
+		case "castle":
+			renderCastleToSvg(canvas, charge.Tincture.Hexcode, lineColor)
+		case "cock":
+			renderCockToSvg(canvas, charge.Tincture.Hexcode, lineColor)
+		case "cockatrice":
+			renderCockatriceToSvg(canvas, charge.Tincture.Hexcode, lineColor)
+		case "crown":
+			renderCrownToSvg(canvas, charge.Tincture.Hexcode, lineColor)
+		case "dolphin-hauriant":
+			renderDolphinHauriantToSvg(canvas, charge.Tincture.Hexcode, lineColor)
+		case "double-headed-eagle-displayed":
+			renderDoubleHeadedEagleDisplayedToSvg(canvas, charge.Tincture.Hexcode, lineColor)
+		case "dragon-rampant":
+			renderDragonRampantToSvg(canvas, charge.Tincture.Hexcode, lineColor)
+		case "eagles-head-erased":
+			renderEaglesHeadErasedToSvg(canvas, charge.Tincture.Hexcode, lineColor)
+		case "fox-sejant":
+			renderFoxSejantToSvg(canvas, charge.Tincture.Hexcode, lineColor)
+		case "gryphon-segreant":
+			renderGryphonSegreantToSvg(canvas, charge.Tincture.Hexcode, lineColor)
+		case "hare-salient":
+			renderHareSalientToSvg(canvas, charge.Tincture.Hexcode, lineColor)
+		case "hare":
+			renderHareToSvg(canvas, charge.Tincture.Hexcode, lineColor)
+		case "heron":
+			renderHeronToSvg(canvas, charge.Tincture.Hexcode, lineColor)
+		case "horse-passant":
+			renderHorsePassantToSvg(canvas, charge.Tincture.Hexcode, lineColor)
+		case "horse-rampant":
+			renderHorseRampantToSvg(canvas, charge.Tincture.Hexcode, lineColor)
+		case "leopard-passant":
+			renderLeopardPassantToSvg(canvas, charge.Tincture.Hexcode, lineColor)
+		case "lion-passant":
+			renderLionPassantToSvg(canvas, charge.Tincture.Hexcode, lineColor)
 		case "lion-rampant":
-			renderLionRampantToSvg(canvas, charge.Tincture.Hexcode)
+			renderLionRampantToSvg(canvas, charge.Tincture.Hexcode, lineColor)
+		case "lions-head-erased":
+			renderLionsHeadErasedToSvg(canvas, charge.Tincture.Hexcode, lineColor)
+		case "owl":
+			renderOwlToSvg(canvas, charge.Tincture.Hexcode, lineColor)
+		case "pegasus-passant":
+			renderPegasusPassantToSvg(canvas, charge.Tincture.Hexcode, lineColor)
+		case "pegasus-rampant":
+			renderPegasusRampantToSvg(canvas, charge.Tincture.Hexcode, lineColor)
+		case "ram-rampant":
+			renderRamRampantToSvg(canvas, charge.Tincture.Hexcode, lineColor)
+		case "ram-statant":
+			renderRamStatantToSvg(canvas, charge.Tincture.Hexcode, lineColor)
+		case "rose":
+			renderRoseToSvg(canvas, charge.Tincture.Hexcode, lineColor)
+		case "sea-horse":
+			renderSeaHorseToSvg(canvas, charge.Tincture.Hexcode, lineColor)
+		case "serpent-nowed":
+			renderSerpentNowedToSvg(canvas, charge.Tincture.Hexcode, lineColor)
+		case "squirrel":
+			renderSquirrelToSvg(canvas, charge.Tincture.Hexcode, lineColor)
+		case "stag-lodged":
+			renderStagLodgedToSvg(canvas, charge.Tincture.Hexcode, lineColor)
+		case "stag-statant":
+			renderStagStatantToSvg(canvas, charge.Tincture.Hexcode, lineColor)
+		case "sun-in-splendor":
+			renderSunInSplendorToSvg(canvas, charge.Tincture.Hexcode, lineColor)
+		case "tiger-passant":
+			renderTigerPassantToSvg(canvas, charge.Tincture.Hexcode, lineColor)
+		case "tiger-rampant":
+			renderTigerRampantToSvg(canvas, charge.Tincture.Hexcode, lineColor)
+		case "tower":
+			renderTowerToSvg(canvas, charge.Tincture.Hexcode, lineColor)
+		case "two-axes-in-saltire":
+			renderTwoAxesInSaltireToSvg(canvas, charge.Tincture.Hexcode, lineColor)
+		case "two-bones-in-saltire":
+			renderTwoBonesInSaltireToSvg(canvas, charge.Tincture.Hexcode, lineColor)
+		case "unicorn-rampant":
+			renderUnicornRampantToSvg(canvas, charge.Tincture.Hexcode, lineColor)
+		case "unicorn-statant":
+			renderUnicornStatantToSvg(canvas, charge.Tincture.Hexcode, lineColor)
+		case "wolf-passant":
+			renderWolfPassantToSvg(canvas, charge.Tincture.Hexcode, lineColor)
+		case "wolf-rampant":
+			renderWolfRampantToSvg(canvas, charge.Tincture.Hexcode, lineColor)
+		case "wyvern":
+			renderWyvernToSvg(canvas, charge.Tincture.Hexcode, lineColor)
 		}
 
 	}
