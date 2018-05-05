@@ -3,10 +3,11 @@ package main
 import (
 	"flag"
 	"fmt"
-	"github.com/ironarachne/heraldry"
 	"html/template"
 	"os"
 	"strconv"
+
+	"github.com/ironarachne/heraldry"
 )
 
 type Arms struct {
@@ -37,11 +38,11 @@ func main() {
 	.blazon {
 		font-size: 1.5rem;
 		font-style: italic;
-		text-align: center;
 	}
 
 	.device {
 		margin: 1rem;
+		text-align: center;
 		width: 400px;
 	}
 
@@ -78,7 +79,7 @@ func main() {
 		device := heraldry.Generate()
 		iteration = strconv.Itoa(i)
 		fileName = "device-" + iteration + ".svg"
-		heraldry.RenderToSvg(device, *filePath + "/" + fileName, 320, 420)
+		heraldry.RenderToSvg(device, *filePath+"/"+fileName, 320, 420)
 
 		arms.FileName = fileName
 		arms.Blazon = heraldry.RenderToBlazon(device)
