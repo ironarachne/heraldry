@@ -24,8 +24,10 @@ func RenderToBlazon(device Device) string {
 	}
 
 	if len(device.Charges) > 0 {
-		blazon += ", a " + device.Charges[0].Name + " " + device.Charges[0].Tincture.Name
+		blazon += ", " + device.Charges[0].Article + " " + device.Charges[0].Noun + " " + device.Charges[0].Descriptor + " " + device.Charges[0].Tincture.Name
 	}
+
+	blazon = strings.Replace(blazon, "  ", " ", -1)
 
 	return blazon
 }
