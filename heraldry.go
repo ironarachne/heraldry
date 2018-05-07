@@ -100,7 +100,7 @@ var (
 	Cockatrice                 = Charge{"cockatrice", "cockatrice", "cockatrice", "cockatrices", "", "a", false}
 	Crown                      = Charge{"crown", "crown", "crown", "crowns", "", "a", false}
 	DolphinHauriant            = Charge{"dolphin-hauriant", "dolphin hauriant", "dolphin", "dolphins", "hauriant", "a", false}
-	DoubleHeadedEagleDisplayed = Charge{"double-headed-eagle-displayed", "double-headed eagle displayed", "double-headed eagle", "double-headed eagles", "displayed", "an", false}
+	DoubleHeadedEagleDisplayed = Charge{"double-headed-eagle-displayed", "double-headed eagle displayed", "double-headed eagle", "double-headed eagles", "displayed", "a", false}
 	DragonRampant              = Charge{"dragon-rampant", "dragon rampant", "dragon", "dragons", "rampant", "a", false}
 	EaglesHeadErased           = Charge{"eagles-head-erased", "eagle's head erased", "eagle's head", "eagle's heads", "erased", "an", false}
 	FoxSejant                  = Charge{"fox-sejant", "fox sejant", "fox", "foxes", "sejant", "a", false}

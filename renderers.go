@@ -91,18 +91,36 @@ func RenderToSvg(device Device, fileName string, width int, height int) {
 		}
 		for index, charge := range chargeGroup.Charges {
 			if len(chargeGroup.Charges) == 2 {
-				if index == 0 {
-					canvas.Translate(20, 200)
-				} else if index == 1 {
-					canvas.Translate(300, 200)
+				if charge.Identifier == "pale" {
+					if index == 0 {
+						canvas.Translate(20, 0)
+					} else if index == 1 {
+						canvas.Translate(300, 0)
+					}
+				} else {
+					if index == 0 {
+						canvas.Translate(20, 200)
+					} else if index == 1 {
+						canvas.Translate(300, 200)
+					}
 				}
 			} else if len(chargeGroup.Charges) == 3 {
-				if index == 0 {
-					canvas.Translate(20, 80)
-				} else if index == 1 {
-					canvas.Translate(300, 80)
-				} else if index == 2 {
-					canvas.Translate(160, 400)
+				if charge.Identifier == "pale" {
+					if index == 0 {
+						canvas.Translate(-20, 0)
+					} else if index == 1 {
+						canvas.Translate(160, 0)
+					} else if index == 2 {
+						canvas.Translate(340, 00)
+					}
+				} else {
+					if index == 0 {
+						canvas.Translate(20, 80)
+					} else if index == 1 {
+						canvas.Translate(300, 80)
+					} else if index == 2 {
+						canvas.Translate(160, 400)
+					}
 				}
 			}
 			if chargeGroup.Tincture.Name == "sable" {
@@ -110,7 +128,11 @@ func RenderToSvg(device Device, fileName string, width int, height int) {
 			}
 			switch charge.Identifier {
 			case "pale":
-				canvas.Rect(int(width/3), 0, int(width/3), height, "fill:"+chargeGroup.Tincture.Hexcode)
+				if len(chargeGroup.Charges) > 1 {
+					canvas.Rect(int(width/3), 0, int(width/3), height*2, "fill:"+chargeGroup.Tincture.Hexcode)
+				} else {
+					canvas.Rect(int(width/3), 0, int(width/3), height, "fill:"+chargeGroup.Tincture.Hexcode)
+				}
 			case "fess":
 				canvas.Rect(0, int(height/3), width, int(height/3), "fill:"+chargeGroup.Tincture.Hexcode)
 			case "cross":
