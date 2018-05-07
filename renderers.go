@@ -86,13 +86,24 @@ func RenderToSvg(device Device, fileName string, width int, height int) {
 	for _, chargeGroup := range device.ChargeGroups {
 		if len(chargeGroup.Charges) == 2 {
 			canvas.Scale(0.5)
-			canvas.Translate(0, 200)
+		} else if len(chargeGroup.Charges) == 3 {
+			canvas.Scale(0.5)
 		}
 		for index, charge := range chargeGroup.Charges {
-			if len(chargeGroup.Charges) == 2 && index == 0 {
-				canvas.Translate(20, 0)
-			} else if len(chargeGroup.Charges) == 2 && index == 1 {
-				canvas.Translate(300, 0)
+			if len(chargeGroup.Charges) == 2 {
+				if index == 0 {
+					canvas.Translate(20, 200)
+				} else if index == 1 {
+					canvas.Translate(300, 200)
+				}
+			} else if len(chargeGroup.Charges) == 3 {
+				if index == 0 {
+					canvas.Translate(20, 80)
+				} else if index == 1 {
+					canvas.Translate(300, 80)
+				} else if index == 2 {
+					canvas.Translate(160, 400)
+				}
 			}
 			if chargeGroup.Tincture.Name == "sable" {
 				lineColor = "#FFFFFF"
@@ -278,7 +289,6 @@ func RenderToSvg(device Device, fileName string, width int, height int) {
 			}
 		}
 		if len(chargeGroup.Charges) > 1 {
-			canvas.Gend()
 			canvas.Gend()
 		}
 	}

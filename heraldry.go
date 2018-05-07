@@ -227,7 +227,9 @@ func Generate() Device {
 		rand.Seed(time.Now().UnixNano())
 		chargeCountRanking := rand.Intn(10)
 		countOfCharges := 1
-		if chargeCountRanking >= 8 && !charge.SingleOnly {
+		if chargeCountRanking >= 9 && !charge.SingleOnly {
+			countOfCharges = 3
+		} else if chargeCountRanking >= 7 && chargeCountRanking < 9 && !charge.SingleOnly {
 			countOfCharges = 2
 		}
 		for i := 0; i < countOfCharges; i++ {
