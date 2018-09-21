@@ -6,7 +6,7 @@ jobs:
   build:
     docker:
       - image: circleci/golang:1.10
-    working_directory: /go/src/github.com/ironarachne/heraldry
+    working_directory: /go/src/gitlab.com/ironarachne/heraldry
     steps:
       - checkout
       - run: go get -v -t -d ./...
