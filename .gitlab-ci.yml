@@ -16,6 +16,7 @@ before_script:
   - ln -svf $CI_PROJECT_DIR $GOPATH/src/$REPO_NAME
   - cd $GOPATH/src/$REPO_NAME
   - go get github.com/ajstarks/svgo
+  - go get github.com/divan/num2words
 
 stages:
     - test
