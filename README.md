@@ -4,7 +4,7 @@
 
 A tool to generate random heraldry, written in Go.
 
-## The markarms command
+## The makearms command
 
 The binary output of this program is a command `makearms`. You can use this program to generate random heraldry in SVG format.
 
