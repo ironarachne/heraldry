@@ -7,7 +7,7 @@ import (
 	"os"
 	"strconv"
 
-	"gitlab.com/ironarachne/heraldry"
+	"github.com/ironarachne/heraldry"
 )
 
 type Arms struct {
