@@ -2,7 +2,6 @@ package heraldry
 
 import (
 	"math/rand"
-	"time"
 )
 
 type Tincture struct {
@@ -141,35 +140,28 @@ var (
 )
 
 func randomCharge() Charge {
-	rand.Seed(time.Now().UnixNano())
 	return AvailableCharges[rand.Intn(len(AvailableCharges))]
 }
 
 func randomDivision() Division {
-	rand.Seed(time.Now().UnixNano())
 	return AvailableDivisions[rand.Intn(len(AvailableDivisions))]
 }
 
 func randomTincture() Tincture {
-	rand.Seed(time.Now().UnixNano())
 	return AvailableTinctures[rand.Intn(len(AvailableTinctures))]
 }
 
 func randomTinctureColor() Tincture {
-	rand.Seed(time.Now().UnixNano())
 	t := Colors[rand.Intn(len(Colors))]
 	return t
 }
 
 func randomTinctureMetal() Tincture {
-	rand.Seed(time.Now().UnixNano())
 	t := Metals[rand.Intn(len(Metals))]
 	return t
 }
 
 func randomComplementaryTincture(t Tincture) Tincture {
-	rand.Seed(time.Now().UnixNano())
-
 	var availableTinctures []Tincture
 	if t.Type == "color" {
 		for _, color := range Colors {
@@ -190,7 +182,6 @@ func randomComplementaryTincture(t Tincture) Tincture {
 }
 
 func randomContrastingTincture(t Tincture) Tincture {
-	rand.Seed(time.Now().UnixNano())
 	t2 := Tincture{}
 	if t.Type == "metal" {
 		t2 = randomTinctureColor()
@@ -202,7 +193,6 @@ func randomContrastingTincture(t Tincture) Tincture {
 }
 
 func shallWeIncludeCharges() bool {
-	rand.Seed(time.Now().UnixNano())
 	someRandomValue := rand.Intn(10)
 	if someRandomValue > 2 {
 		return true
@@ -224,7 +214,7 @@ func Generate() Device {
 
 	if shallWeIncludeCharges() {
 		charge := randomCharge()
-		rand.Seed(time.Now().UnixNano())
+
 		chargeCountRanking := rand.Intn(10)
 		countOfCharges := 1
 		if chargeCountRanking >= 9 && !charge.SingleOnly {

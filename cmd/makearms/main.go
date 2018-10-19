@@ -4,17 +4,21 @@ import (
 	"flag"
 	"fmt"
 	"html/template"
+	"math/rand"
 	"os"
 	"strconv"
+	"time"
 
 	"github.com/ironarachne/heraldry"
 )
 
+// Arms is a combination of the blazon and the image filename
 type Arms struct {
 	FileName string
 	Blazon   string
 }
 
+// OutputData is a formalization of the heraldry array
 type OutputData struct {
 	Arms []Arms
 }
@@ -22,7 +26,8 @@ type OutputData struct {
 func main() {
 	numberOfResults := flag.Int("results", 1, "Number of results to generate")
 	filePath := flag.String("path", ".", "Directory to dump output into")
-	createHtmlIndex := flag.Bool("html", false, "Create an HTML index of output")
+	createHTMLIndex := flag.Bool("html", false, "Create an HTML index of output")
+	randomSeed := flag.Int64("s", 0, "Optional random generator seed")
 
 	const htmlIndexTemplate = `
 <!DOCTYPE html>
@@ -75,6 +80,12 @@ func main() {
 
 	outputData := OutputData{}
 
+	if *randomSeed == 0 {
+		rand.Seed(time.Now().UnixNano())
+	} else {
+		rand.Seed(*randomSeed)
+	}
+
 	for i := 0; i < *numberOfResults; i++ {
 		device := heraldry.Generate()
 		iteration = strconv.Itoa(i)
@@ -86,7 +97,7 @@ func main() {
 		outputData.Arms = append(outputData.Arms, arms)
 	}
 
-	if *createHtmlIndex {
+	if *createHTMLIndex {
 		writer, err := os.Create(*filePath + "/index.html")
 		if err != nil {
 			fmt.Println(err)
