@@ -90,7 +90,7 @@ func main() {
 		device := heraldry.Generate()
 		iteration = strconv.Itoa(i)
 		fileName = "device-" + iteration + ".svg"
-		heraldry.RenderToSvg(device, *filePath+"/"+fileName, 320, 420)
+		heraldry.RenderToSVGFile(device, *filePath+"/"+fileName, 320, 420)
 
 		arms.FileName = fileName
 		arms.Blazon = heraldry.RenderToBlazon(device)
