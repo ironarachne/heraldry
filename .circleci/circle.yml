@@ -1,0 +1,35 @@
+# Golang CircleCI 2.0 configuration file
+#
+# Check https://circleci.com/docs/2.0/language-go/ for more details
+version: 2
+jobs:
+  build_armsapi:
+    docker:
+      - image: circleci/golang:1.11
+    working_directory: /go/src/github.com/ironarachne/heraldry
+    steps:
+      - checkout
+      - run: go get -v -t -d ./...
+      - run: go test -v ./...
+      - setup_remote_docker:
+          docker_layer_caching: true
+      - run:
+          name: Install Docker client
+          command: |
+            set -x
+            VER="18.03.0-ce"
+            curl -L -o /tmp/docker-$VER.tgz https://download.docker.com/linux/static/stable/x86_64/docker-$VER.tgz
+            tar -xz -C /tmp -f /tmp/docker-$VER.tgz
+            mv /tmp/docker/* /usr/bin
+      - run: |
+          cd cmd/armsapi
+          TAG=0.1.$CIRCLE_BUILD_NUM
+          docker build -t ironarachne/armsapi:$TAG -t ironarachne/armsapi:latest .
+          docker login -u $DOCKER_USER -p $DOCKER_PASS
+          docker push ironarachne/armsapi:$TAG
+          docker push ironarachne/armsapi:latest
+  deploy_armsapi:
+    machine:
+        enabled: true
+    steps:
+      - run: curl -X POST 'https://portainer.ironarachne.com/api/webhooks/743e1cbd-2bc5-4633-95fd-5da61fb18a94'
