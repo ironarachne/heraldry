@@ -25,3 +25,15 @@ jobs:
         enabled: true
     steps:
       - run: curl -X POST 'https://portainer.ironarachne.com/api/webhooks/743e1cbd-2bc5-4633-95fd-5da61fb18a94'
+
+workflows:
+  version: 2
+  build-and-deploy:
+    jobs:
+      - build
+      - deploy:
+          requires:
+            - build
+          filters:
+            branches:
+              only: master
