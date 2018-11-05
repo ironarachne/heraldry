@@ -206,6 +206,16 @@ func Generate() Device {
 	fieldTincture2 := randomComplementaryTincture(fieldTincture1)
 	chargeTincture := randomContrastingTincture(fieldTincture1)
 
+	fieldHasContrastingTinctures := false
+
+	if rand.Intn(10) > 1 {
+		fieldHasContrastingTinctures = true
+	}
+
+	if fieldHasContrastingTinctures {
+		fieldTincture2 = randomContrastingTincture(fieldTincture1)
+	}
+
 	division := randomDivision()
 	division.Tincture = fieldTincture2
 
