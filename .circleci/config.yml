@@ -3,7 +3,7 @@
 # Check https://circleci.com/docs/2.0/language-go/ for more details
 version: 2
 jobs:
-  build_armsapi:
+  build:
     docker:
       - image: circleci/golang:1.11
     working_directory: /go/src/github.com/ironarachne/heraldry
@@ -28,7 +28,7 @@ jobs:
           docker login -u $DOCKER_USER -p $DOCKER_PASS
           docker push ironarachne/armsapi:$TAG
           docker push ironarachne/armsapi:latest
-  deploy_armsapi:
+  deploy:
     machine:
         enabled: true
     steps:
