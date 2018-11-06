@@ -21,8 +21,7 @@ func main() {
 		rand.Seed(time.Now().UnixNano())
 		device := heraldry.Generate()
 		svg := device.RenderToSVG(width, height)
-		blazon := heraldry.RenderToBlazon(device)
-		ctx.JSON(iris.Map{"device": svg, "blazon": blazon})
+		ctx.Writef(svg)
 	})
 
 	app.Get("/device/{id:int64}", func(ctx iris.Context) {
@@ -35,8 +34,7 @@ func main() {
 		rand.Seed(id)
 		device := heraldry.Generate()
 		svg := device.RenderToSVG(width, height)
-		blazon := heraldry.RenderToBlazon(device)
-		ctx.JSON(iris.Map{"device": svg, "blazon": blazon})
+		ctx.Writef(svg)
 	})
 
 	app.Run(iris.Addr(":7476"))
