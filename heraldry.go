@@ -20,6 +20,7 @@ type Charge struct {
 	Descriptor string
 	Article    string
 	SingleOnly bool
+	Tags       []string
 }
 
 // ChargeGroup is a group of charges with a common tincture
