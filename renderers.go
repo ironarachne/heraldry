@@ -51,15 +51,36 @@ func (device Device) RenderToSVG(width int, height int) string {
 
 	lineColor := "#000000"
 
+	blazon := RenderToBlazon(device)
+
+	blazonLength := len(blazon)
+	blazonSize := "10"
+
+	if blazonLength < 25 {
+		blazonSize = "28"
+	} else if blazonLength < 30 {
+		blazonSize = "26"
+	} else if blazonLength < 35 {
+		blazonSize = "20"
+	} else if blazonLength < 40 {
+		blazonSize = "18"
+	} else if blazonLength < 50 {
+		blazonSize = "14"
+	} else if blazonLength < 60 {
+		blazonSize = "12"
+	} else if blazonLength < 80 {
+		blazonSize = "11"
+	}
+
 	canvas := svg.New(buffer)
-	canvas.Start(width, height, "mask='url(#shieldmask)'")
-	canvas.Title(RenderToBlazon(device))
+	canvas.Start(width, height+50)
+	canvas.Title(blazon)
 	canvas.Def()
 	canvas.Mask("shieldmask", 0, 0, width, height)
 	canvas.Path("m10.273 21.598v151.22c0 96.872 89.031 194.34 146.44 240.09 57.414-45.758 146.44-143.22 146.44-240.09v-151.22h-292.89z", "fill:#FFFFFF")
 	canvas.MaskEnd()
 	canvas.DefEnd()
-	canvas.Group()
+	canvas.Group("mask='url(#shieldmask)'")
 	canvas.Rect(0, 0, width, height, "fill:"+device.Field.Tincture.Hexcode)
 	switch device.Field.Division.Name {
 	case "plain":
@@ -314,6 +335,7 @@ func (device Device) RenderToSVG(width int, height int) string {
 
 	canvas.Path("m10.273 21.598v151.22c0 96.872 89.031 194.34 146.44 240.09 57.414-45.758 146.44-143.22 146.44-240.09v-151.22h-292.89z", "stroke:#000000;stroke-width:4;fill:none")
 	canvas.Gend()
+	canvas.Text(centerX, height+25, blazon, "font-size:"+blazonSize+"px;text-anchor:middle")
 	canvas.End()
 
 	return buffer.String()
