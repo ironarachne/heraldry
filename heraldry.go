@@ -2,6 +2,8 @@ package heraldry
 
 import (
 	"math/rand"
+
+	"github.com/ironarachne/utility"
 )
 
 // Tincture is a tincture
@@ -57,7 +59,16 @@ func randomDivision() Division {
 }
 
 func randomTincture() Tincture {
-	return AvailableTinctures[rand.Intn(len(AvailableTinctures))]
+	typeOfTincture := utility.RandomItemFromThresholdMap(tinctureChances)
+
+	if typeOfTincture == "metal" {
+		return randomTinctureMetal()
+	} else if typeOfTincture == "color" {
+		return randomTinctureColor()
+	}
+
+	return randomTinctureStain()
+
 }
 
 func randomTinctureColor() Tincture {
@@ -70,12 +81,26 @@ func randomTinctureMetal() Tincture {
 	return t
 }
 
+func randomTinctureStain() Tincture {
+	t := Stains[rand.Intn(len(Stains))]
+	return t
+}
+
 func randomComplementaryTincture(t Tincture) Tincture {
 	var availableTinctures []Tincture
-	if t.Type == "color" {
-		for _, color := range Colors {
-			if color.Name != t.Name {
-				availableTinctures = append(availableTinctures, color)
+	if t.Type == "color" || t.Type == "stain" {
+		typeOfTincture := utility.RandomItemFromThresholdMap(colorOrStainChances)
+		if typeOfTincture == "color" {
+			for _, color := range Colors {
+				if color.Name != t.Name {
+					availableTinctures = append(availableTinctures, color)
+				}
+			}
+		} else {
+			for _, stain := range Stains {
+				if stain.Name != t.Name {
+					availableTinctures = append(availableTinctures, stain)
+				}
 			}
 		}
 	} else {
@@ -93,7 +118,12 @@ func randomComplementaryTincture(t Tincture) Tincture {
 func randomContrastingTincture(t Tincture) Tincture {
 	t2 := Tincture{}
 	if t.Type == "metal" {
-		t2 = randomTinctureColor()
+		typeOfTincture := utility.RandomItemFromThresholdMap(colorOrStainChances)
+		if typeOfTincture == "color" {
+			t2 = randomTinctureColor()
+		} else {
+			t2 = randomTinctureStain()
+		}
 	} else {
 		t2 = randomTinctureMetal()
 	}
