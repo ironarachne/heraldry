@@ -48,6 +48,7 @@ type Field struct {
 type Device struct {
 	Field
 	ChargeGroups []ChargeGroup
+	AllTinctures []Tincture
 }
 
 func randomCharge() Charge {
@@ -65,14 +66,20 @@ func randomTincture() Tincture {
 		return randomTinctureMetal()
 	} else if typeOfTincture == "color" {
 		return randomTinctureColor()
+	} else if typeOfTincture == "stain" {
+		return randomTinctureStain()
 	}
 
-	return randomTinctureStain()
-
+	return randomTinctureFur()
 }
 
 func randomTinctureColor() Tincture {
 	t := Colors[rand.Intn(len(Colors))]
+	return t
+}
+
+func randomTinctureFur() Tincture {
+	t := Furs[rand.Intn(len(Furs))]
 	return t
 }
 
@@ -145,6 +152,8 @@ func Generate() Device {
 	fieldTincture2 := randomComplementaryTincture(fieldTincture1)
 	chargeTincture := randomContrastingTincture(fieldTincture1)
 
+	var tinctures []Tincture
+
 	fieldHasContrastingTinctures := false
 
 	if rand.Intn(10) > 1 {
@@ -157,6 +166,9 @@ func Generate() Device {
 
 	division := randomDivision()
 	division.Tincture = fieldTincture2
+
+	tinctures = append(tinctures, fieldTincture1)
+	tinctures = append(tinctures, fieldTincture2)
 
 	var charges []Charge
 	var chargeGroups []ChargeGroup
@@ -175,11 +187,12 @@ func Generate() Device {
 			charges = append(charges, charge)
 		}
 		chargeGroup := ChargeGroup{charges, chargeTincture}
+		tinctures = append(tinctures, chargeTincture)
 		chargeGroups = append(chargeGroups, chargeGroup)
 	}
 
 	f := Field{Division: division, Tincture: fieldTincture1}
-	d := Device{Field: f, ChargeGroups: chargeGroups}
+	d := Device{Field: f, ChargeGroups: chargeGroups, AllTinctures: tinctures}
 
 	return d
 }

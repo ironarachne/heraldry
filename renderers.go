@@ -79,6 +79,17 @@ func (device Device) RenderToSVG(width int, height int) string {
 	canvas.Mask("shieldmask", 0, 0, width, height)
 	canvas.Path("m10.273 21.598v151.22c0 96.872 89.031 194.34 146.44 240.09 57.414-45.758 146.44-143.22 146.44-240.09v-151.22h-292.89z", "fill:#FFFFFF")
 	canvas.MaskEnd()
+	for _, tincture := range device.AllTinctures {
+		if tincture.Name == "erminois" {
+			insertErmine(canvas, "erminois")
+		} else if tincture.Name == "ermine" {
+			insertErmine(canvas, "ermine")
+		} else if tincture.Name == "ermines" {
+			insertErmine(canvas, "ermines")
+		} else if tincture.Name == "pean" {
+			insertErmine(canvas, "pean")
+		}
+	}
 	canvas.DefEnd()
 	canvas.Group("mask='url(#shieldmask)'")
 	canvas.Rect(0, 0, width, height, "fill:"+device.Field.Tincture.Hexcode)
