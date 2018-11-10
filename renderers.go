@@ -15,10 +15,20 @@ import (
 func RenderToBlazon(device Device) string {
 	blazon := ""
 	if device.Field.Division.Name == "plain" {
-		blazon = strings.Title(device.Field.Tincture.Name)
+		if device.Field.HasVariation {
+			blazon = strings.Title(device.Field.Variation.Name)
+			blazon += " " + device.Field.Variation.Tincture1.Name + " and " + device.Field.Variation.Tincture2.Name
+		} else {
+			blazon = strings.Title(device.Field.Tincture.Name)
+		}
 	} else {
 		blazon = device.Field.Division.Blazon
-		blazon += device.Field.Tincture.Name
+		if device.Field.HasVariation {
+			blazon += device.Field.Variation.Name
+			blazon += " " + device.Field.Variation.Tincture1.Name + " and " + device.Field.Variation.Tincture2.Name
+		} else {
+			blazon += device.Field.Tincture.Name
+		}
 	}
 
 	if device.Field.Division.Name != "plain" {
@@ -90,9 +100,18 @@ func (device Device) RenderToSVG(width int, height int) string {
 			insertErmine(canvas, "pean")
 		}
 	}
+	if device.Field.HasVariation {
+		insertVariationPattern(canvas, device.Field.Variation)
+	}
 	canvas.DefEnd()
 	canvas.Group("mask='url(#shieldmask)'")
-	canvas.Rect(0, 0, width, height, "fill:"+device.Field.Tincture.Hexcode)
+
+	if device.Field.HasVariation {
+		canvas.Rect(0, 0, width, height, "fill:url(#"+device.Field.Variation.Name+")")
+	} else {
+		canvas.Rect(0, 0, width, height, "fill:"+device.Field.Tincture.Hexcode)
+	}
+
 	switch device.Field.Division.Name {
 	case "plain":
 	case "pale":

@@ -38,10 +38,19 @@ type Division struct {
 	Tincture
 }
 
+// Variation is a variation of the field
+type Variation struct {
+	Name      string
+	Tincture1 Tincture
+	Tincture2 Tincture
+}
+
 // Field is the field of a coat of arms
 type Field struct {
 	Division
 	Tincture
+	HasVariation bool
+	Variation
 }
 
 // Device is the entire coat of arms
@@ -167,6 +176,18 @@ func Generate() Device {
 	division := randomDivision()
 	division.Tincture = fieldTincture2
 
+	field := Field{Division: division, Tincture: fieldTincture1, HasVariation: false, Variation: Variation{}}
+
+	if shallWeHaveAVariation() {
+		variation := randomVariation()
+		variation.Tincture1 = randomTincture()
+		variation.Tincture2 = randomContrastingTincture(variation.Tincture1)
+		tinctures = append(tinctures, variation.Tincture1, variation.Tincture2)
+
+		field.HasVariation = true
+		field.Variation = variation
+	}
+
 	tinctures = append(tinctures, fieldTincture1)
 	tinctures = append(tinctures, fieldTincture2)
 
@@ -191,8 +212,7 @@ func Generate() Device {
 		chargeGroups = append(chargeGroups, chargeGroup)
 	}
 
-	f := Field{Division: division, Tincture: fieldTincture1}
-	d := Device{Field: f, ChargeGroups: chargeGroups, AllTinctures: tinctures}
+	d := Device{Field: field, ChargeGroups: chargeGroups, AllTinctures: tinctures}
 
 	return d
 }
