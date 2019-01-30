@@ -93,7 +93,7 @@ func main() {
 		heraldry.RenderToSVGFile(device, *filePath+"/"+fileName, 320, 420)
 
 		arms.FileName = fileName
-		arms.Blazon = heraldry.RenderToBlazon(device)
+		arms.Blazon = device.RenderToBlazon()
 		outputData.Arms = append(outputData.Arms, arms)
 	}
 
