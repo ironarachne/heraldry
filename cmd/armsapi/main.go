@@ -46,6 +46,7 @@ func main() {
 		rand.Seed(time.Now().UnixNano())
 		device := heraldry.Generate()
 		svg := device.RenderToSVG(width, height)
+		ctx.ContentType("image/svg+xml")
 		ctx.Writef(svg)
 	})
 
@@ -58,6 +59,7 @@ func main() {
 		}
 		svg, found := c.Get("svg_" + strconv.FormatInt(id, 10))
 		if found {
+			ctx.ContentType("image/svg+xml")
 			ctx.Writef(svg.(string))
 		} else {
 			rand.Seed(id)
@@ -66,6 +68,7 @@ func main() {
 			blazon := device.RenderToBlazon()
 			c.Set("blazon_"+strconv.FormatInt(id, 10), blazon, cache.DefaultExpiration)
 			c.Set("svg_"+strconv.FormatInt(id, 10), svg, cache.DefaultExpiration)
+			ctx.ContentType("image/svg+xml")
 			ctx.Writef(svg)
 		}
 	})
